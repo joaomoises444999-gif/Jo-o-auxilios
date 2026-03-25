@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Painel Gamer</title>
+<style>
+body {
+    background: #0f172a;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+    background: #22c55e;
+    color: white;
+    font-size: 14px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Painel Gamer 🎮</h1>
+
+<div class="container">
+
+<!-- AUXÍLIO -->
+<div class="card">
+<h2>Auxílio (Visual)</h2>
+
+<button onclick="toggle('tremor')">Tirar Tremedeira</button>
+<button onclick="toggle('recuo')">Diminuir Recuo</button>
+<button onclick="toggle('aimbot')">Aimbot</button>
+<button onclick="toggle('aimlock')">Aimlock</button>
+
+<p id="status"></p>
+</div>
+
+<!-- GERADOR DE SENSI -->
+<div class="card">
+<h2>Gerador de Sensibilidade</h2>
+
+<button onclick="gerarSensi()">Gerar</button>
+
+<p>Geral: <span id="geral"></span></p>
+<p>Red Dot: <span id="red"></span></p>
+<p>2x: <span id="doisx"></span></p>
+<p>4x: <span id="quatrox"></span></p>
+<p>AWM: <span id="awm"></span></p>
+<p>Botão: <span id="botao"></span></p>
+<p>DPI: <span id="dpi"></span></p>
+</div>
+
+<!-- FPS -->
+<div class="card">
+<h2>Medidor de FPS</h2>
+
+<p>FPS Atual: <span id="fps">0</span></p>
+
+<button onclick="fps120()">120 FPS</button>
+<button onclick="reduzirLag()">Reduzir Travamento</button>
+
+<p id="fpsStatus"></p>
+</div>
+
+</div>
+
+<script>
+// AUXÍLIO
+let estados = {
+    tremor: false,
+    recuo: false,
+    aimbot: false,
+    aimlock: false
+};
+
+function toggle(tipo) {
+    estados[tipo] = !estados[tipo];
+    
+    document.getElementById("status").innerText =
+        "Tremedeira: " + (estados.tremor ? "ON" : "OFF") + " | " +
+        "Recuo: " + (estados.recuo ? "ON" : "OFF") + " | " +
+        "Aimbot: " + (estados.aimbot ? "ON" : "OFF") + " | " +
+        "Aimlock: " + (estados.aimlock ? "ON" : "OFF");
+}
+
+// GERADOR DE SENSI (145 a 200)
+function randRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function gerarSensi() {
+    document.getElementById("geral").innerText = randRange(145, 200);
+    document.getElementById("red").innerText = randRange(145, 200);
+    document.getElementById("doisx").innerText = randRange(145, 200);
+    document.getElementById("quatrox").innerText = randRange(145, 200);
+    document.getElementById("awm").innerText = randRange(145, 200);
+
+    document.getElementById("botao").innerText = randRange(35, 40);
+    document.getElementById("dpi").innerText = randRange(400, 700);
+}
+
+// MEDIDOR DE FPS (simulado)
+function atualizarFPS() {
+    let fps = randRange(50, 120);
+    document.getElementById("fps").innerText = fps;
+}
+
+setInterval(atualizarFPS, 1000);
+
+// BOTÕES FPS
+function fps120() {
+    document.getElementById("fpsStatus").innerText = "Modo 120 FPS ativado (visual)";
+}
+
+function reduzirLag() {
+    document.getElementById("fpsStatus").innerText = "Otimização aplicada (visual)";
+}
+</script>
+
+</body>
+</html>
